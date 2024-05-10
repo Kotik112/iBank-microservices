@@ -6,6 +6,7 @@ import com.eazybytes.accounts.dto.ResponseDto;
 import com.eazybytes.accounts.service.IAccountService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -36,7 +37,17 @@ public class AccountsController {
             summary = "Create a new account for the customer",
             description = "This endpoint is used to create a new account for the customer"
     )
-    @ApiResponse(responseCode = "201", description = "Account created successfully")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Account created successfully"),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Account creation failed",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
     @PostMapping("/create")
     public ResponseEntity<ResponseDto> createAccount(@Valid @RequestBody CustomerDto customerDto) {
         accountService.createAccount(customerDto);
@@ -49,7 +60,17 @@ public class AccountsController {
             summary = "Fetch account details",
             description = "This endpoint is used to fetch account details for the customer"
     )
-    @ApiResponse(responseCode = "200", description = "Account details fetched successfully")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Account details fetched successfully"),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Account details fetch failed",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
     @GetMapping("/fetch")
     public ResponseEntity<CustomerDto> fetchAccountDetails(@RequestParam
                     @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number should be 10 digits")
@@ -65,6 +86,14 @@ public class AccountsController {
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Account details updated successfully"),
+            @ApiResponse(
+                    responseCode = "417",
+                    description = "Expectation failed",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            ),
             @ApiResponse(
                     responseCode = "500",
                     description = "Account details update failed",
@@ -83,8 +112,8 @@ public class AccountsController {
                     .body(new ResponseDto(STATUS_200, "Account details updated successfully"));
         } else {
             return ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDto(STATUS_500, "Account details update failed"));
+                    .status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDto(STATUS_417, MESSAGE_417_UPDATE));
         }
     }
 
@@ -94,6 +123,18 @@ public class AccountsController {
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Account details deleted successfully"),
+            @ApiResponse(
+                    responseCode = "417",
+                    description = "Expectation failed",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ErrorResponseDto.class),
+                            examples = @ExampleObject(
+                                    name = "Delete Account",
+                                    value = "{\"apiPath\": \"/accounts/delete\", \"errorCode\": \"417\", \"errorMessage\": \"Resource not found\", \"errorTime\": \"2021-07-01T10:00:00\"}"
+                            )
+                    )
+            ),
             @ApiResponse(
                     responseCode = "500",
                     description = "Account details deletion failed",
@@ -114,8 +155,8 @@ public class AccountsController {
                     .body(new ResponseDto(STATUS_200, MESSAGE_200));
         } else {
             return ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDto(STATUS_500, MESSAGE_500));
+                    .status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDto(STATUS_417, MESSAGE_417_DELETE));
         }
     }
 
