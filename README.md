@@ -20,18 +20,13 @@ Welcome to iBank Application! This is a simple banking application developed usi
 
 ## Setup Instructions
 1. **Clone the Repository:** Clone this repository to your local machine using `git clone`.
-2. **Database Configuration:** Set up a MySQL database and configure the database connection details in the `application.properties / application.yml` file.
+2. **Database Configuration:** Set up a MySQL database and configure the database connection details in the `application.properties` or `application.yml` file.
 3. **Build the Project:** Navigate to the project directory and build the project using Maven: `mvn clean install`.
-4. **Run the Application:** Run the application using `java -jar ibank-bank.jar`.
-5. **Access the Application:** Open your web browser and go to `http://localhost:8080` to access the EasyBytes Bank Application.
+4. **Run the Application:** Run the application using `java -jar loans-0.0.1-SNAPSHOT.jar`.
+5. **Access the Endpoints:** Access to endpoints will be available under `http://localhost:8080` for Accounts service, `http://localhost:8090` for Loans service and finally `http://localhost:9000` for Cards service.
 
 ## Usage
-1. **Login:** Enter your username and password to log in to your account.
-2. **Dashboard:** Once logged in, you will be redirected to the dashboard where you can view your account details and perform banking operations.
-3. **Create Account:** If you are a new user, you can create a new bank account by providing the necessary details.
-4. **Deposit and Withdraw:** Deposit money into your accounts or withdraw funds as needed.
-5. **Transfer Money:** Transfer money between your accounts or to other users by providing the recipient's account details.
-6. **Transaction History:** View your transaction history to keep track of all your financial activities.
+In works...
 
 ## License
 This project is licensed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
