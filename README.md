@@ -1,22 +1,23 @@
 # iBank Back End Application (Spring Boot)
 
-Welcome to iBank Application! This is a simple banking application developed using Java and Spring Boot, for managing your finances conveniently. With this application, you can perform various banking operations such as creating accounts, depositing money, withdrawing funds, transferring money between accounts, and checking your account balance. The application has been made with 3 microservice components: Accounts, Loans and Cards. 
+Welcome to iBank Application! This is a simple banking application developed using Java and Spring Boot, for managing your finances conveniently. With this application, you can perform various banking operations such as creating accounts, depositing money, withdrawing funds, transferring money between accounts, and checking your account balance. The application has been made with 3 microservice components: `Accounts`, `Loans` and `Cards`. 
 
 ## Note: The project is still a WIP.
 
 ## Features
-- **User Authentication:** Secure login system to ensure only authorized users can access their accounts.
+- **User Authentication:** Secure login system to ensure only authorized users can access their accounts. (Not complete)
 - **Account Management:** Create, view, and manage your bank accounts easily.
 - **Deposit and Withdrawal:** Deposit money into your accounts and withdraw funds whenever needed.
 - **Transfer Funds:** Transfer money between your own accounts or to other users within the system.
-- **Transaction History:** Keep track of your transactions with a detailed transaction history.
-- **Security:** Your data is securely stored and encrypted to ensure confidentiality.
+- **Transaction History:** Keep track of your transactions with a detailed transaction history. (Not complete)
+- **Security:** Your data is securely stored and encrypted to ensure confidentiality. (Not complete)
 
 ## Technologies Used
 - **Programming Language:** Java
 - **Database:** MySQL
 - **Frameworks:** Spring Boot, Hibernate
 - **Build Tool:** Maven
+- **Features: Docker support, 
 
 ## Setup Instructions
 1. **Clone the Repository:** Clone this repository to your local machine using `git clone`.
