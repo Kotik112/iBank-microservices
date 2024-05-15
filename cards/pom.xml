@@ -83,7 +83,7 @@
 				<version>3.4.1</version>
 				<configuration>
 					<to>
-						<image>thekotik/${project.artifactId}:0.1</image>
+						<image>docker.io/thekotik/${project.artifactId}:0.2</image>
 					</to>
 				</configuration>
 			</plugin>

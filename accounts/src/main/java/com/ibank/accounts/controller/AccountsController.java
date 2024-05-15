@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,9 @@ import static com.ibank.accounts.constants.AccountsConstants.*;
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 @Validated
 public class AccountsController {
+
+    @Value("${build.version}")
+    private String buildVersion;
 
     private final IAccountService accountService;
 
@@ -158,6 +162,26 @@ public class AccountsController {
                     .status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDto(STATUS_417, MESSAGE_417_DELETE));
         }
+    }
+
+    @Operation(
+            summary = "Get build information",
+            description = "This endpoint is used to get the build information"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Build information fetched successfully"),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Build information fetch failed",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo() {
+        return ResponseEntity.ok(buildVersion);
     }
 
 }
