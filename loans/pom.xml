@@ -79,7 +79,6 @@
 				<configuration>
 					<image>
 						<name>thekotik/${project.artifactId}:0.1</name>
-
 					</image>
 					<excludes>
 						<exclude>

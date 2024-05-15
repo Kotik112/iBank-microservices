@@ -27,7 +27,8 @@ Welcome to iBank Application! This is a simple banking application developed usi
 5. **Access the Endpoints:** Access to endpoints will be available under `http://localhost:8080` for Accounts service, `http://localhost:8090` for Loans service and finally `http://localhost:9000` for Cards service.
 
 ## Usage
-In works...
+The simplest way of starting the ibank backend application is by running the following command:
+```docker-compose up``` in the root directory of the project. This will start the application and the database(soon) in a docker container.
 
 ## License
 This project is licensed under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
