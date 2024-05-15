@@ -1,4 +1,4 @@
-# iBank Back End Application (Spring Boot)
+# iBank Back End Microservices
 
 Welcome to iBank Application! This is a simple banking application developed using Java and Spring Boot, for managing your finances conveniently. With this application, you can perform various banking operations such as creating accounts, depositing money, withdrawing funds, transferring money between accounts, and checking your account balance. The application has been made with 3 microservice components: `Accounts`, `Loans` and `Cards`. 
 
