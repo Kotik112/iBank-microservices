@@ -1,5 +1,6 @@
 package com.ibank.cards.controller;
 
+import com.ibank.cards.dto.AccountsContactInfoDto;
 import com.ibank.cards.dto.CardsDto;
 import com.ibank.cards.dto.ErrorResponseDto;
 import com.ibank.cards.dto.ResponseDto;
@@ -13,6 +14,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,10 +34,18 @@ import static com.ibank.cards.constants.CardsConstants.*;
 @Validated
 public class CardsController {
 
-    private final ICardsService cardsService;
+    @Value("${build.version}")
+    private String buildVersion;
 
-    public CardsController(ICardsService cardsService) {
+    @Autowired
+    private AccountsContactInfoDto accountsContactInfoDto;
+
+    private final ICardsService cardsService;
+    private final Environment environment;
+
+    public CardsController(ICardsService cardsService, Environment environment) {
         this.cardsService = cardsService;
+        this.environment = environment;
     }
 
     @Operation(
@@ -188,5 +200,70 @@ public class CardsController {
                     .status(HttpStatus.EXPECTATION_FAILED)
                     .body(new ResponseDto(STATUS_417, MESSAGE_417_DELETE));
         }
+    }
+
+    @Operation(
+            summary = "Get build information",
+            description = "This endpoint is used to get the build information"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Build information fetched successfully"),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Build information fetch failed",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo() {
+        return ResponseEntity.ok(buildVersion);
+    }
+
+
+    @Operation(
+            summary = "Get Java version",
+            description = "This endpoint is used to get the Java version"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Java version fetched successfully"),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Java version fetch failed",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @GetMapping("/java-version")
+    public ResponseEntity<String> getJavaVersion() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(environment.getProperty("JAVA_HOME"));
+    }
+
+    @Operation(
+            summary = "Get Contact Information",
+            description = "This endpoint is used to get the contact information"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Contact information fetched successfully"),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Contact information fetch failed",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactInfoDto> getContactInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(accountsContactInfoDto);
     }
 }

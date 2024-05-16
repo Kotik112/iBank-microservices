@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+build:
+  version: "0.2"
+
+accounts:
+  message: "Welcome to iBank Accounts Service (Dev env)!"
+  contactDetails:
+    name: "Arman Iqbal - Developer"
+    email: "armaniqbal@gmail.com"
+  onCallSupport:
+    - "armaniqbal@gmail.com"
