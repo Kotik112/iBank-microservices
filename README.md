@@ -23,8 +23,8 @@ Note that this project is a work in progress and is being actively developed and
 - **Build Tool:** Maven
 - **Containerization:** Docker
 - **API Documentation:** SpringDoc OpenAPI
-- **Orchestration:** Docker Compose
-- **Configuration:** Spring Cloud Config Server/Client
+- **Orchestration:** Docker Compose (for local dev) and Kubernetes (not implemented yet)
+- **Configuration:** Spring Cloud Config (using [github repo](https://github.com/Kotik112/ibank-config)) and Spring Cloud Bus
 
 ## Setup Instructions
 1. **Clone the Repository:** Clone this repository to your local machine using `git clone`.
