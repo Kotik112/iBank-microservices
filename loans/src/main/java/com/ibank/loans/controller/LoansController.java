@@ -1,6 +1,6 @@
 package com.ibank.loans.controller;
 
-import com.ibank.loans.dto.AccountsContactInfoDto;
+import com.ibank.loans.dto.LoansContactInfoDto;
 import com.ibank.loans.dto.LoansDto;
 import com.ibank.loans.dto.ResponseDto;
 import com.ibank.loans.service.ILoansService;
@@ -31,7 +31,7 @@ public class LoansController {
     private String buildVersion;
 
     @Autowired
-    private AccountsContactInfoDto accountsContactInfoDto;
+    private LoansContactInfoDto loansContactInfoDto;
 
     private final ILoansService loansService;
     private final Environment environment;
@@ -139,9 +139,9 @@ public class LoansController {
             )
     })
     @GetMapping("/contact-info")
-    public ResponseEntity<AccountsContactInfoDto> getContactInfo() {
+    public ResponseEntity<LoansContactInfoDto> getContactInfo() {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(accountsContactInfoDto);
+                .body(loansContactInfoDto);
     }
 }

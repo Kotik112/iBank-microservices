@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+      config:
+          server:
+            # Get Spring Cloud Config Server to fetch configuration from git
+            git:
+              uri: https://github.com/Kotik112/ibank-config.git
+              default-label: main
+              timeout: 5
+              clone-on-start: true
+              force-pull: true
+  profiles:
+    active: git
+  rabbitmq:
+    host: rabbit
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+
+server:
+  port: 8071
+
+encrypt:
+  key: 0e6408af4ec9f95c303860f7325c547d7a39a83a3e5580aef01941a9

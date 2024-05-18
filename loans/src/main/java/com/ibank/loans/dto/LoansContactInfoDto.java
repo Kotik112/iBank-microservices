@@ -1,4 +1,4 @@
-package com.ibank.accounts.dto;
+package com.ibank.loans.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
@@ -9,31 +9,28 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Data transfer object for accounts contact information.
+ * Data transfer object for loans service developer contact information.
  */
 @Schema(
-        name = "AccountsContact",
-        description = "Contact information for Accounts service"
+        name = "LoansContact",
+        description = "Contact information for Loans service"
 )
-@ConfigurationProperties(prefix = "accounts")
+@ConfigurationProperties(prefix = "loans")
 @Getter @Setter
-public class AccountsContactInfoDto {
+public class LoansContactInfoDto {
         @Schema(
                 description = "Message",
                 example = "For any queries, please contact the support team"
         )
-        private String message;
-
+        String message;
         @Schema(
                 description = "Contact details",
                 example = "something@email.com"
         )
-        private Map<String, String> contactDetails;
-
+        Map<String, String> contactDetails;
         @Schema(
                 description = "On-call support email addresses",
                 example = "something@email.com"
         )
-        private List<String> onCallSupport;
-
+        List<String> onCallSupport;
 }

@@ -1,6 +1,6 @@
 package com.ibank.cards.controller;
 
-import com.ibank.cards.dto.AccountsContactInfoDto;
+import com.ibank.cards.dto.CardsContactInfoDto;
 import com.ibank.cards.dto.CardsDto;
 import com.ibank.cards.dto.ErrorResponseDto;
 import com.ibank.cards.dto.ResponseDto;
@@ -38,7 +38,7 @@ public class CardsController {
     private String buildVersion;
 
     @Autowired
-    private AccountsContactInfoDto accountsContactInfoDto;
+    private CardsContactInfoDto cardsContactInfoDto;
 
     private final ICardsService cardsService;
     private final Environment environment;
@@ -261,9 +261,9 @@ public class CardsController {
             )
     })
     @GetMapping("/contact-info")
-    public ResponseEntity<AccountsContactInfoDto> getContactInfo() {
+    public ResponseEntity<CardsContactInfoDto> getContactInfo() {
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(accountsContactInfoDto);
+                .body(cardsContactInfoDto);
     }
 }

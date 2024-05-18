@@ -1,6 +1,6 @@
 package com.ibank.loans;
 
-import com.ibank.loans.dto.AccountsContactInfoDto;
+import com.ibank.loans.dto.LoansContactInfoDto;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -29,7 +29,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 )
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
-@EnableConfigurationProperties(value = {AccountsContactInfoDto.class})
+@EnableConfigurationProperties(value = {LoansContactInfoDto.class})
 public class LoansApplication {
 
 	public static void main(String[] args) {
