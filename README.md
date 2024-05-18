@@ -24,6 +24,7 @@ Note that this project is a work in progress and is being actively developed and
 - **Containerization:** Docker
 - **API Documentation:** SpringDoc OpenAPI
 - **Orchestration:** Docker Compose
+- **Configuration:** Spring Cloud Config Server/Client
 
 ## Setup Instructions
 1. **Clone the Repository:** Clone this repository to your local machine using `git clone`.

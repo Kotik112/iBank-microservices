@@ -1,5 +1,6 @@
 package com.ibank.accounts.controller;
 
+import com.ibank.accounts.dto.AccountsContactInfoDto;
 import com.ibank.accounts.dto.CustomerDto;
 import com.ibank.accounts.dto.ErrorResponseDto;
 import com.ibank.accounts.dto.ResponseDto;
@@ -13,7 +14,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +33,12 @@ public class AccountsController {
 
     @Value("${build.version}")
     private String buildVersion;
+
+    @Autowired
+    private Environment environment;
+
+    @Autowired
+    private AccountsContactInfoDto accountsContactInfoDto;
 
     private final IAccountService accountService;
 
@@ -184,4 +193,47 @@ public class AccountsController {
         return ResponseEntity.ok(buildVersion);
     }
 
+    @Operation(
+            summary = "Get Java version",
+            description = "This endpoint is used to get the Java version"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Java version fetched successfully"),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Java version fetch failed",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @GetMapping("/java-version")
+    public ResponseEntity<String> getJavaVersion() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(environment.getProperty("JAVA_HOME"));
+    }
+
+    @Operation(
+            summary = "Get Contact Information",
+            description = "This endpoint is used to get the contact information"
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Contact information fetched successfully"),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Contact information fetch failed",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactInfoDto> getContactInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(accountsContactInfoDto);
+    }
 }
